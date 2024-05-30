@@ -1,0 +1,14 @@
+{
+  "name": "getpostprac",
+  "version": "1.0.0",
+  "description": "\"하루 한 번 서버연습'",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    ""
+  ],
+  "author": "KimInteger",
+  "license": "MIT"
+}
