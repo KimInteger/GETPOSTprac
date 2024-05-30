@@ -58,7 +58,28 @@ const server = http.createServer((req,res)=>{
       });
       req.on('end', ()=>{
         const parsedData = qs.parse(body);
-        console.log(parsedData);
+
+        let postJson = {
+          name : parsedData.name,
+          hobby : parsedData.hobby
+        };
+
+        fs.writeFile(path.join(__dirname,'public',`${postJson.name}.txt`), JSON.stringify(postJson, null, 2), (err)=>{
+          if(err){
+            console.error(err);
+          } else {
+            fs.readFile('./public/index.html', (err,data)=>{
+              if (err) {
+                res.writeHead(500,{"Content-Type" : "text/plain; charset=UTF-8"});
+                res.end("서버 자체에서 에러가 발생했습니다.");
+                return;
+              } else {
+                res.writeHead(200,{"Content-Type" : "text/html; charset=UTF-8"});
+                res.end(data);
+              }
+            });
+          }
+        })
       });
     } else {
       res.writeHead(404,{"Content-Type" : "text/plain; charset=UTF-8"});
